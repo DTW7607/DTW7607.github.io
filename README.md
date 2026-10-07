@@ -18,6 +18,13 @@
 手动选择保存到 `localStorage` 的 `huarongdao.language`，刷新及两个入口之间导航后保留。
 浏览器禁止存储时仍可即时切换，但无法跨刷新保存偏好。切换不会重置棋局。
 
+## 触发区域检查页
+
+访问 https://dtw7607.github.io/test/ 查看三角形箭头的真实触发区域。
+各彩色区域对应同色箭头，区域边界直接使用游戏的点击判定坐标；提示动画不改变边界。
+其他功能与根路径一致，包括中英文切换、布阵、拖动、惯性滑动、撤销和提示。
+覆盖层不接收鼠标或触摸事件，布阵、拖动中及胜利时自动隐藏。
+
 ## 验证
 
 页面无需构建，也不依赖新增运行时包。开发检查可安装测试依赖后执行：
@@ -27,6 +34,7 @@ npm install --no-save jsdom playwright
 node tests/english-support.cjs
 npx playwright install chromium
 node tests/english-support.browser.cjs
+node tests/hit-regions.browser.cjs
 ```
 
 也可用 `CHROMIUM_EXECUTABLE` 指定本地 Chromium；`SCREENSHOT_DIR` 指定已存在的截图目录。

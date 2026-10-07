@@ -1,19 +1,19 @@
 // Run with Playwright available; optionally set CHROMIUM_EXECUTABLE and SCREENSHOT_DIR.
 const {chromium}=require('playwright');
 const root=require('node:path').resolve(__dirname,'..');
-const server=require('node:http').createServer((req,res)=>{const fs=require('node:fs');res.setHeader('Content-Type','text/html');res.end(fs.readFileSync(root+(req.url==='/huarongdao/'?'/huarongdao/index.html':'/index.html')))});
+const server=require('node:http').createServer((req,res)=>{const fs=require('node:fs');res.setHeader('Content-Type','text/html');res.end(fs.readFileSync(root+(req.url==='/test/'?'/test/index.html':req.url==='/huarongdao/'?'/huarongdao/index.html':'/index.html')))});
 const assert=require('node:assert/strict');
 (async()=>{await new Promise(r=>server.listen(8765,'127.0.0.1',r));const browser=await chromium.launch({executablePath:process.env.CHROMIUM_EXECUTABLE||undefined,args:['--no-sandbox','--disable-gpu','--no-zygote'],headless:true});
 let checks=0;
 for(const langs of [['zh-CN'],['zh-TW'],['en-US'],['en-GB'],['fr'],['fr','en-GB','zh'],['fr','zh-TW','en']]){
  const c=await browser.newContext();await c.addInitScript(ls=>Object.defineProperty(navigator,'languages',{value:ls}),langs);const p=await c.newPage();await p.goto('http://127.0.0.1:8765/');await p.waitForSelector('.preset',{state:'attached'});assert.equal(await p.locator('html').getAttribute('lang'),langs.find(x=>/^(en|zh)/.test(x))?.startsWith('en')?'en':'zh-CN');checks++;await c.close();
 }
-for(const width of [320,375,390,768,1280])for(const locale of ['zh-CN','en-GB']){
- const c=await browser.newContext({viewport:{width,height:width===1280?900:844},locale,reducedMotion:'reduce'});const p=await c.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:8765/');await p.waitForSelector('.preset',{state:'attached'});
+for(const entry of ['/','/test/'])for(const width of [320,375,390,768,1280])for(const locale of ['zh-CN','en-GB']){
+ const c=await browser.newContext({viewport:{width,height:width===1280?900:844},locale,reducedMotion:'reduce'});const p=await c.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:8765'+entry);await p.waitForSelector('.preset',{state:'attached'});
  await p.locator('[data-language=en]').focus();await p.keyboard.press('Enter');assert.equal(await p.locator('html').getAttribute('lang'),'en');
  assert.equal(await p.evaluate(()=>localStorage.getItem('huarongdao.language')),'en');
  assert(await p.evaluate(()=>[...document.querySelectorAll('.masthead a,.masthead button')].filter(e=>e.getBoundingClientRect().width).every(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth})),`header overflow ${width}`);
- await p.reload();assert.equal(await p.locator('html').getAttribute('lang'),'en');await p.goto('http://127.0.0.1:8765/huarongdao/');assert.equal(await p.locator('html').getAttribute('lang'),'en');
+ await p.reload();assert.equal(await p.locator('html').getAttribute('lang'),'en');await p.goto('http://127.0.0.1:8765/huarongdao/');assert.equal(await p.locator('html').getAttribute('lang'),'en');if(entry==='/test/')await p.goto('http://127.0.0.1:8765/test/');
  await p.locator('[data-language=zh]').focus();await p.keyboard.press('Space');assert.equal(await p.locator('html').getAttribute('lang'),'zh-CN');
  await p.locator('.move-arrow:not([hidden])').first().focus();await p.keyboard.press('Enter');await p.waitForFunction(()=>document.querySelector('#move-count').textContent==='1');await p.keyboard.press('z');await p.waitForFunction(()=>document.querySelector('#move-count').textContent==='0');
  await p.locator('[data-language=en]').click();await p.locator('#rules-button').click();assert.equal(await p.locator('#rules-dialog h2').innerText(),'How to play');await p.keyboard.press('Escape');
