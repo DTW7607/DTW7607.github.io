@@ -28,45 +28,51 @@ body[data-phase=editing]:not(.picker-open) .workspace{max-height:720px}body[data
 @media(max-height:500px) and (min-width:600px){body{grid-template-rows:46px minmax(0,1fr)}.workspace{padding:8px 16px;max-width:850px}.game-panel{display:grid;grid-template-columns:minmax(0,1fr) 185px;grid-template-rows:35px minmax(0,1fr) 80px;gap:12px;max-width:760px}.board-shell{grid-column:1;grid-row:1/4}.game-heading{grid-column:2;grid-row:1;align-self:start}h1{font-size:23px}.game-toolbar{grid-column:2;grid-row:2;flex-direction:column;justify-content:center;gap:14px}.game-actions{grid-column:2;grid-row:3;grid-template-columns:1fr;gap:7px}.setup-panel{inset:58px auto 12px 12px;width:320px;padding:13px}.setup-panel .mini-board{display:none}.tabs{margin-bottom:10px}.panel-heading{margin-bottom:11px}body[data-phase=editing]:not(.picker-open) .workspace{grid-template-columns:minmax(0,1fr) 260px;grid-template-rows:minmax(0,1fr);gap:16px;max-width:900px}body[data-phase=editing]:not(.picker-open) .game-panel{grid-column:1;grid-row:1;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:25px minmax(0,1fr);gap:6px}body[data-phase=editing]:not(.picker-open) .game-heading{grid-row:1;grid-column:1}body[data-phase=editing]:not(.picker-open) .game-toolbar{display:none}body[data-phase=editing]:not(.picker-open) .board-shell{grid-row:2;grid-column:1}body[data-phase=editing]:not(.picker-open) .setup-panel{grid-column:2;grid-row:1;max-height:100%;align-self:center}body[data-phase=editing]:not(.picker-open) .inventory{--tray-cell:32px}body[data-phase=editing]:not(.picker-open) .editor-actions{grid-template-columns:repeat(2,1fr)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.spinner{border-color:var(--light);border-style:dotted}.won .piece.cao{opacity:0}.victory-banner{opacity:1}}
 
+
+.language-picker{display:flex;align-items:center;gap:3px;white-space:nowrap;font-size:12px}.language-picker button{background:transparent;color:#b5c1a4;padding:7px 4px;border-radius:4px}.language-picker button[aria-pressed=true]{color:var(--light);background:#435336}
+html[lang=en] .brand,html[lang=en] h1{letter-spacing:0}html[lang=en] h1{font-size:22px}html[lang=en] .preset-name{white-space:normal;text-align:center;font-size:12px;letter-spacing:0}html[lang=en] .piece-name,html[lang=en] .tray-name{writing-mode:horizontal-tb!important;letter-spacing:0!important;text-align:center;font-size:clamp(9px,3.6cqw,17px)!important;line-height:1.2}html[lang=en] .piece-role{font:9px sans-serif;letter-spacing:0;bottom:15%}html[lang=en] .inventory-item{font-size:12px}html[lang=en] .brand-mark,html[lang=en] .victory-seal{font-family:serif}
+@media(max-width:480px){.masthead{padding:0 8px}.brand{font-size:20px;gap:7px}.header-actions{gap:0}.quiet-button{padding:7px 5px;font-size:12px}.language-picker{font-size:11px;gap:0}html[lang=en] .brand{font-size:17px}html[lang=en] h1{font-size:20px}.brand-mark{width:24px;height:27px;font-size:19px}.icon-button{width:30px}}
+@media(max-width:380px){#edit-toggle svg{display:none}html[lang=en] .brand{font-size:14px;gap:5px}html[lang=en] .brand-mark{display:none}}
 </style>
 </head>
 <body>
   <header class="masthead">
-    <a class="brand" href="" aria-label="华容道首页"><span class="brand-mark" aria-hidden="true">华</span>华容道</a>
+    <a class="brand" href="" data-i18n-aria="华容道首页" aria-label="华容道首页"><span class="brand-mark" aria-hidden="true">华</span><span data-i18n="华容道">华容道</span></a>
     <div class="header-actions">
-      <button class="quiet-button compact-only" id="setup-open" aria-expanded="false" aria-controls="setup-panel">阵型</button>
-      <button class="quiet-button" id="edit-toggle" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 4 6 6M4 20l4-1 12-12-3-3L5 16Z"/></svg>布阵</button>
-      <button class="quiet-button icon-button" id="rules-button" aria-label="玩法"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 2-2.5 2-2.5 4M12 17h.01"/></svg></button>
+      <div class="language-picker" role="group" aria-label="中文 / English"><button type="button" data-language="zh" lang="zh-CN">中文</button><span aria-hidden="true">/</span><button type="button" data-language="en" lang="en">English</button></div>
+      <button class="quiet-button compact-only" id="setup-open" aria-expanded="false" aria-controls="setup-panel"><span data-i18n="阵型">阵型</span></button>
+      <button class="quiet-button" id="edit-toggle" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 4 6 6M4 20l4-1 12-12-3-3L5 16Z"/></svg><span data-i18n="布阵">布阵</span></button>
+      <button class="quiet-button icon-button" id="rules-button" data-i18n-aria="玩法" aria-label="玩法"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 2-2.5 2-2.5 4M12 17h.01"/></svg></button>
     </div>
   </header>
   <main class="workspace">
-    <aside class="setup-panel" id="setup-panel" aria-label="阵型与布阵">
-      <div class="panel-heading"><h2 id="panel-title">阵型</h2><span id="editor-count" class="subtle" hidden>0 / 10</span><button class="drawer-close compact-only" id="setup-close" aria-label="收起阵型">×</button></div>
-      <div class="tabs" role="tablist" aria-label="布阵方式">
-        <button id="classic-tab" role="tab" aria-selected="true" aria-controls="classic-panel">经典</button>
-        <button id="custom-tab" role="tab" aria-selected="false" aria-controls="custom-panel">自定义</button>
+    <aside class="setup-panel" id="setup-panel" data-i18n-aria="阵型与布阵" aria-label="阵型与布阵">
+      <div class="panel-heading"><h2 id="panel-title"><span data-i18n="阵型">阵型</span></h2><span id="editor-count" class="subtle" hidden>0 / 10</span><button class="drawer-close compact-only" id="setup-close" data-i18n-aria="收起阵型" aria-label="收起阵型">×</button></div>
+      <div class="tabs" role="tablist" data-i18n-aria="布阵方式" aria-label="布阵方式">
+        <button id="classic-tab" role="tab" aria-selected="true" aria-controls="classic-panel"><span data-i18n="经典">经典</span></button>
+        <button id="custom-tab" role="tab" aria-selected="false" aria-controls="custom-panel"><span data-i18n="自定义">自定义</span></button>
       </div>
       <div id="classic-panel" role="tabpanel" aria-labelledby="classic-tab"><div class="presets" id="presets"></div></div>
       <div id="custom-panel" role="tabpanel" aria-labelledby="custom-tab" hidden>
         <div class="inventory" id="inventory"></div>
         <div class="editor-actions">
-          <button class="small-button" id="rotate-button" disabled>旋转</button>
-          <button class="small-button" id="remove-button" disabled>取回</button>
-          <button class="small-button" id="copy-layout">复制</button>
-          <button class="small-button" id="clear-layout">清空</button>
+          <button class="small-button" id="rotate-button" disabled><span data-i18n="旋转">旋转</span></button>
+          <button class="small-button" id="remove-button" disabled><span data-i18n="取回">取回</span></button>
+          <button class="small-button" id="copy-layout"><span data-i18n="复制">复制</span></button>
+          <button class="small-button" id="clear-layout"><span data-i18n="清空">清空</span></button>
         </div>
       </div>
     </aside>
-    <section class="game-panel" aria-label="华容道棋盘">
-      <div class="game-heading"><h1 id="layout-title">横刀立马</h1><span id="game-status" class="status-badge" hidden>布阵中</span></div>
+    <section class="game-panel" data-i18n-aria="华容道棋盘" aria-label="华容道棋盘">
+      <div class="game-heading"><h1 id="layout-title"><span data-i18n="横刀立马">横刀立马</span></h1><span id="game-status" class="status-badge" hidden><span data-i18n="布阵中">布阵中</span></span></div>
       <div class="game-toolbar">
-        <div class="stats" id="stats"><span><b id="move-count">0</b> 步</span><span id="timer">00:00</span></div>
+        <div class="stats" id="stats"><span><b id="move-count">0</b> <span data-i18n="步">步</span></span><span id="timer">00:00</span></div>
         <span class="editor-selection" id="editor-selection" hidden></span>
-        <button id="hint-button" class="hint-button" aria-pressed="false"><span class="hint-symbol" aria-hidden="true"><svg id="hint-icon" viewBox="0 0 24 24"><path d="M9 18h6m-5 3h4M8.5 14.5a6 6 0 1 1 7 0c-.8.6-1.5 1.5-1.5 3h-4c0-1.5-.7-2.4-1.5-3Z"/></svg><i class="spinner" id="hint-spinner" hidden></i></span><span id="hint-label">开启提示</span></button>
+        <button id="hint-button" class="hint-button" aria-pressed="false"><span class="hint-symbol" aria-hidden="true"><svg id="hint-icon" viewBox="0 0 24 24"><path d="M9 18h6m-5 3h4M8.5 14.5a6 6 0 1 1 7 0c-.8.6-1.5 1.5-1.5 3h-4c0-1.5-.7-2.4-1.5-3Z"/></svg><i class="spinner" id="hint-spinner" hidden></i></span><span id="hint-label"><span data-i18n="开启提示">开启提示</span></span></button>
       </div>
       <div class="board-shell">
         <div class="board-frame">
-          <div class="board" id="board" tabindex="0" role="group" aria-label="四列五行棋盘">
+          <div class="board" id="board" tabindex="0" role="group" data-i18n-aria="四列五行棋盘" aria-label="四列五行棋盘">
             <div class="grid-cells" id="grid-cells" aria-hidden="true"></div>
             <div id="placement-preview" class="placement-preview" aria-hidden="true" hidden></div>
             <div id="pieces"></div>
@@ -76,16 +82,127 @@ body[data-phase=editing]:not(.picker-open) .workspace{max-height:720px}body[data
         </div>
         <div class="exit-mark" aria-hidden="true"><span></span><i></i><span></span></div>
         <div id="victory-effects" class="victory-effects" aria-hidden="true"></div>
-        <div id="victory-banner" class="victory-banner" role="status" hidden><span class="victory-seal" aria-hidden="true">通</span><strong>走出华容道</strong><span id="win-summary"></span></div>
+        <div id="victory-banner" class="victory-banner" role="status" hidden><span class="victory-seal" aria-hidden="true">通</span><strong><span data-i18n="走出华容道">走出华容道</span></strong><span id="win-summary"></span></div>
       </div>
-      <div class="game-actions"><button id="undo-button" class="secondary-button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5-5 5 5 5M4 10h9a6 6 0 0 1 0 12"/></svg>撤销</button><button id="restart-button" class="secondary-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 2 8M4 4v6h6"/></svg>重开</button></div>
+      <div class="game-actions"><button id="undo-button" class="secondary-button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5-5 5 5 5M4 10h9a6 6 0 0 1 0 12"/></svg><span data-i18n="撤销">撤销</span></button><button id="restart-button" class="secondary-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 2 8M4 4v6h6"/></svg><span data-i18n="重开">重开</span></button></div>
     </section>
   </main>
-  <button class="drawer-scrim" id="drawer-scrim" aria-label="收起阵型面板" hidden></button>
+  <button class="drawer-scrim" id="drawer-scrim" data-i18n-aria="收起阵型面板" aria-label="收起阵型面板" hidden></button>
   <div class="toast" id="toast" role="status" hidden></div>
   <span class="sr-only" id="hint-status" role="status" aria-live="polite"></span>
-  <dialog id="rules-dialog"><button class="dialog-close" data-close="rules-dialog" aria-label="关闭玩法">×</button><h2>玩法</h2><p>把曹操送到底部中央出口。</p><ul><li>点击棋子旁的小三角，每次移动一格。也可直接拖动棋子。</li><li>电脑可按 Z 撤销。</li><li>布阵时可拖入棋子，或点选后点击空位；放齐后自动游玩。</li><li>点击「布阵」可继续编辑。完成编辑后，再次点击「布阵」返回棋局。</li></ul><button class="secondary-button" data-close="rules-dialog">关闭</button></dialog>
+  <dialog id="rules-dialog"><button class="dialog-close" data-close="rules-dialog" data-i18n-aria="关闭玩法" aria-label="关闭玩法">×</button><h2><span data-i18n="玩法">玩法</span></h2><p><span data-i18n="把曹操送到底部中央出口。">把曹操送到底部中央出口。</span></p><ul><li><span data-i18n="点击棋子旁的小三角，每次移动一格。也可直接拖动棋子。">点击棋子旁的小三角，每次移动一格。也可直接拖动棋子。</span></li><li><span data-i18n="电脑可按 Z 撤销。">电脑可按 Z 撤销。</span></li><li><span data-i18n="布阵时可拖入棋子，或点选后点击空位；放齐后自动游玩。">布阵时可拖入棋子，或点选后点击空位；放齐后自动游玩。</span></li><li><span data-i18n="点击「布阵」可继续编辑。完成编辑后，再次点击「布阵」返回棋局。">点击「布阵」可继续编辑。完成编辑后，再次点击「布阵」返回棋局。</span></li></ul><button class="secondary-button" data-close="rules-dialog"><span data-i18n="关闭">关闭</span></button></dialog>
 <script type="module">
+// Chinese source strings are stable translation keys; game state is language-independent.
+const EN = {
+  "华容道": "Huarong Dao",
+  "华容道首页": "Huarong Dao home",
+  "华容道：经典阵型、自定义布阵与箭头提示。": "Huarong Dao: classic puzzles, custom layouts and move hints.",
+  "阵型": "Layouts",
+  "布阵": "Edit",
+  "玩法": "How to play",
+  "阵型与布阵": "Layouts and editor",
+  "收起阵型": "Close layouts",
+  "布阵方式": "Layout mode",
+  "经典": "Classic",
+  "自定义": "Custom",
+  "旋转": "Rotate",
+  "取回": "Remove",
+  "复制": "Copy",
+  "清空": "Clear",
+  "华容道棋盘": "Huarong Dao board",
+  "横刀立马": "Holding the Pass",
+  "布阵中": "Editing",
+  "步": "moves",
+  "开启提示": "Show hints",
+  "关闭提示": "Hide hints",
+  "四列五行棋盘": "Board with four columns and five rows",
+  "走出华容道": "Escaped!",
+  "撤销": "Undo",
+  "重开": "Restart",
+  "收起阵型面板": "Close layout panel",
+  "关闭玩法": "Close instructions",
+  "关闭": "Close",
+  "把曹操送到底部中央出口。": "Move Cao Cao to the exit at the bottom center.",
+  "点击棋子旁的小三角，每次移动一格。也可直接拖动棋子。": "Click a triangle beside a piece to move it one square, or drag the piece directly.",
+  "电脑可按 Z 撤销。": "On a computer, press Z to undo.",
+  "布阵时可拖入棋子，或点选后点击空位；放齐后自动游玩。": "In the editor, drag pieces onto the board, or select a piece and click an empty space. Play starts when all pieces are placed.",
+  "点击「布阵」可继续编辑。完成编辑后，再次点击「布阵」返回棋局。": "Click Edit to continue editing. When finished, click Edit again to return to the game.",
+  "指挥若定": "Calm Command",
+  "将拥曹营": "Guarding Cao’s Camp",
+  "齐头并进": "Side by Side",
+  "兵分三路": "Three Fronts",
+  "雨声淅沥": "Gentle Rain",
+  "一路顺风": "Smooth Sailing",
+  "捷足先登": "First to Arrive",
+  "入门": "Beginner",
+  "进阶": "Advanced",
+  "曹操": "Cao Cao",
+  "张飞": "Zhang Fei",
+  "赵云": "Zhao Yun",
+  "马超": "Ma Chao",
+  "黄忠": "Huang Zhong",
+  "关羽": "Guan Yu",
+  "卒": "Pawn",
+  "魏 王": "King of Wei",
+  "上": "up",
+  "右": "right",
+  "下": "down",
+  "左": "left",
+  "计算中": "Calculating",
+  "当前阵型无解": "This layout has no solution",
+  "提示计算失败": "Hint calculation failed",
+  "提示计算超时": "Hint calculation timed out",
+  "无解": "No solution",
+  "提示失败": "Hint failed",
+  "已通关": "Solved",
+  "再来一局": "Play again",
+  "空间不足": "Not enough space",
+  "需要 1 枚曹操、5 位武将与 4 名小卒。": "A layout needs Cao Cao, five generals and four pawns.",
+  "棋子编号重复或无效。": "Piece IDs are duplicated or invalid.",
+  "棋子尺寸不符合传统华容道规则。": "Piece sizes do not follow traditional Huarong Dao rules.",
+  "棋子不能重叠，也不能越出棋盘。": "Pieces cannot overlap or extend beyond the board.",
+  "棋子齐全，保留了 2 格空位。": "All pieces are placed, leaving two empty squares.",
+  "暂时无法计算走法，请关闭提示后重试。": "Cannot calculate moves. Turn hints off and try again.",
+  "查看华容道棋局": "Inspect Huarong Dao game",
+  "读取棋盘、步数、后台预计算与拖动状态。": "Read the board, move count, background calculation and dragging state.",
+  "移动华容道棋子": "Move a Huarong Dao piece",
+  "沿指定方向移动一格。": "Move one square in the specified direction.",
+  "开关华容道提示": "Toggle Huarong Dao hints",
+  "切换小三角的提示动画，后台预计算始终执行。": "Toggle triangle hint animations. Background calculation remains active.",
+  "不需要参数。": "No arguments are needed.",
+  "无效参数。": "Invalid arguments.",
+  "方向受阻或正在布阵。": "The move is blocked or the editor is active.",
+  "enabled 必须为布尔值。": "enabled must be a boolean.",
+  "正在布阵。": "The editor is active."
+};
+const LANGUAGE_KEY='huarongdao.language';
+function matchLanguage(value){return typeof value==='string'&&/^(zh|en)(?:-|$)/i.test(value)?value.slice(0,2).toLowerCase():null;}
+function initialLanguage(){
+  try{const saved=localStorage.getItem(LANGUAGE_KEY);if(saved==='zh'||saved==='en')return saved;}catch{}
+  try{const preferred=navigator.languages?.length?navigator.languages:[navigator.language];for(const value of preferred){const match=matchLanguage(value);if(match)return match;}}catch{}
+  return 'zh';
+}
+let language=initialLanguage();
+function t(key){return language==='en'?(EN[key]??key):key;}
+function moveLabel(p,direction){return language==='en'?`Move ${label(p)} one square ${t(names[direction])}`:`将${label(p)}向${names[direction]}移动一格`;}
+function applyLanguage(){
+  document.documentElement.lang=language==='en'?'en':'zh-CN';
+  document.title=t('华容道');
+  document.querySelector('meta[name="description"]').content=t('华容道：经典阵型、自定义布阵与箭头提示。');
+  for(const e of document.querySelectorAll('[data-i18n]'))e.textContent=t(e.dataset.i18n);
+  for(const e of document.querySelectorAll('[data-i18n-aria]'))e.setAttribute('aria-label',t(e.dataset.i18nAria));
+  for(const e of document.querySelectorAll('[data-language]'))e.setAttribute('aria-pressed',String(e.dataset.language===language));
+  document.querySelector('.brand-mark').textContent=language==='en'?'H':'华';
+  document.querySelector('.victory-seal').textContent=language==='en'?'✓':'通';
+  if($('toast').dataset.message)$('toast').textContent=t($('toast').dataset.message);
+  $('win-summary').textContent=`${game.history.length} ${t('步')} · ${timeLabel(game.time)}`;
+}
+for(const e of document.querySelectorAll('[data-language]'))e.addEventListener('click',()=>{
+  language=e.dataset.language;
+  try{localStorage.setItem(LANGUAGE_KEY,language);}catch{}
+  applyLanguage();render();
+});
+
 const inlineSolverSource="const WIDTH = 4;\nconst HEIGHT = 5;\nconst DIRECTIONS = {up:[0,-1],right:[1,0],down:[0,1],left:[-1,0]};\nconst clone = (pieces) => pieces.map(p => ({...p}));\nconst escaped = (pieces) => pieces.some(p => p.id === 0 && p.x === 1 && p.y === 3);\n\nfunction canPlace(pieces, piece, x, y, w = piece.w, h = piece.h) {\n  if(!Number.isInteger(x)||!Number.isInteger(y)||x<0||y<0||x+w>WIDTH||y+h>HEIGHT) return false;\n  return !pieces.some(p => p.id !== piece.id && p.x >= 0 && p.y >= 0 &&\n    x < p.x+p.w && x+w > p.x && y < p.y+p.h && y+h > p.y);\n}\n\nfunction validateLayout(pieces, complete = true) {\n  if(!Array.isArray(pieces)||pieces.length!==10) return {valid:false,message:'需要 1 枚曹操、5 位武将与 4 名小卒。'};\n  const ids = new Set();\n  let cao=0, generals=0, soldiers=0, placed=0;\n  for(const p of pieces){\n    if(!Number.isInteger(p.id)||ids.has(p.id)) return {valid:false,message:'棋子编号重复或无效。'};\n    ids.add(p.id);\n    if(p.id===0&&p.w===2&&p.h===2) cao++;\n    else if(p.id>=1&&p.id<=5&&((p.w===1&&p.h===2)||(p.w===2&&p.h===1))) generals++;\n    else if(p.id>=6&&p.id<=9&&p.w===1&&p.h===1) soldiers++;\n    else return {valid:false,message:'棋子尺寸不符合传统华容道规则。'};\n    if(p.x===-1&&p.y===-1) continue;\n    if(!canPlace(pieces,p,p.x,p.y)) return {valid:false,message:'棋子不能重叠，也不能越出棋盘。'};\n    placed++;\n  }\n  if(cao!==1||generals!==5||soldiers!==4) return {valid:false,message:'需要 1 枚曹操、5 位武将与 4 名小卒。'};\n  if(complete&&placed!==10) return {valid:false,incomplete:true,placed,message:`已放置 ${placed}/10 枚棋子，请继续布阵。`};\n  return {valid:true,placed,message:'棋子齐全，保留了 2 格空位。'};\n}\n\nfunction move(pieces, id, dx, dy) {\n  if(!Number.isInteger(dx)||!Number.isInteger(dy)||Math.abs(dx)+Math.abs(dy)!==1) return null;\n  const p = pieces.find(p => p.id===id);\n  if(!p||p.x<0||!canPlace(pieces,p,p.x+dx,p.y+dy)) return null;\n  return pieces.map(q => q.id===id ? {...q,x:q.x+dx,y:q.y+dy} : {...q});\n}\n\nfunction signature(pieces){\n  return pieces.map(p => `${p.w}${p.h}:${p.x+4*p.y}`).sort().join('|');\n}\n\n// 同尺寸棋子在求解时等价。用 50 位精确整数保存各组排序后的位置。\n// 宽度和高度属于求解器配置，不在状态中变化；避免哈希碰撞影响提示。\nfunction solve(pieces, progress = () => {}, options = {}) {\n  const checked = validateLayout(pieces);\n  if(!checked.valid) return {status:'invalid',message:checked.message,path:[]};\n  const started = Date.now();\n  const limit = options.limit ?? 1000000;\n  const timeLimit = options.timeLimit ?? 25000;\n  const groups = [];\n  const shapeOrder = [[2,2],[1,2],[2,1],[1,1]];\n  const shapeW=[],shapeH=[],groupFor=[],start=[];\n  for(const [w,h] of shapeOrder){\n    const positions=pieces.filter(p=>p.w===w&&p.h===h).map(p=>p.x+4*p.y).sort((a,b)=>a-b);\n    if(!positions.length) continue;\n    const group={start:start.length,end:start.length+positions.length,w,h};\n    const gi=groups.length;groups.push(group);\n    positions.forEach(pos=>{start.push(pos);shapeW.push(w);shapeH.push(h);groupFor.push(gi);});\n  }\n  const n=start.length;\n  const powers=Array.from({length:n},(_,i)=>32**i);\n  const encode=(positions)=>positions.reduce((key,pos,i)=>key+pos*powers[i],0);\n  const masks=shapeW.map((w,i)=>Array.from({length:20},(_,pos)=>{\n    const x=pos%4,y=Math.floor(pos/4),h=shapeH[i];\n    if(x+w>4||y+h>5) return 0;\n    let mask=0;\n    for(let row=0;row<h;row++)for(let col=0;col<w;col++)mask|=1<<(pos+row*4+col);\n    return mask;\n  }));\n  const first=encode(start);\n  const keys=[first],parents=[-1],steps=[0];\n  const visited=new Map([[first,0]]);\n  const positions=new Array(n);\n  const deltas=[-4,1,4,-1];\n  function result(index){\n    const path=[];\n    while(parents[index]!==-1){\n      const step=steps[index],from=step&31,to=(step>>>5)&31,gi=step>>>10;\n      path.push({from,to,w:groups[gi].w,h:groups[gi].h,dx:to%4-from%4,dy:Math.floor(to/4)-Math.floor(from/4)});\n      index=parents[index];\n    }\n    path.reverse();\n    return {status:'solved',path,visited:visited.size,ms:Date.now()-started};\n  }\n  for(let head=0;head<keys.length;head++){\n    const key=keys[head];\n    let value=key,occupied=0;\n    for(let i=0;i<n;i++){const pos=value%32;value=Math.floor(value/32);positions[i]=pos;occupied|=masks[i][pos];}\n    if(positions[0]===13) return result(head);\n    if((head&4095)===0){\n      progress({visited:visited.size});\n      if(visited.size>limit||Date.now()-started>timeLimit)return {status:'limit',path:[],visited:visited.size};\n    }\n    for(let i=0;i<n;i++){\n      const from=positions[i],x=from%4,y=Math.floor(from/4),w=shapeW[i],h=shapeH[i];\n      const blockers=occupied^masks[i][from];\n      for(let dir=0;dir<4;dir++){\n        if((dir===0&&y===0)||(dir===1&&x+w===4)||(dir===2&&y+h===5)||(dir===3&&x===0))continue;\n        const to=from+deltas[dir],mask=masks[i][to];\n        if(!mask||(mask&blockers))continue;\n        const next=positions.slice();next[i]=to;\n        const group=groups[groupFor[i]];\n        // 插入排序只调整被移动的一个棋子，不改变其他形状的索引。\n        let j=i;\n        while(j>group.start&&next[j]<next[j-1]){[next[j],next[j-1]]=[next[j-1],next[j]];j--;}\n        while(j+1<group.end&&next[j]>next[j+1]){[next[j],next[j+1]]=[next[j+1],next[j]];j++;}\n        const nextKey=encode(next);\n        if(visited.has(nextKey))continue;\n        const index=keys.length;\n        visited.set(nextKey,index);keys.push(nextKey);parents.push(head);steps.push(from|(to<<5)|(groupFor[i]<<10));\n        if(next[0]===13)return result(index);\n      }\n    }\n  }\n  return {status:'unsolvable',path:[],visited:visited.size,ms:Date.now()-started};\n}\n\nself.onmessage = ({data}) => {\n  try{\n    const result=solve(data.pieces,progress=>self.postMessage({type:'progress',ticket:data.ticket,...progress}));\n    self.postMessage({type:'result',ticket:data.ticket,...result});\n  }catch(error){\n    self.postMessage({type:'result',ticket:data.ticket,status:'error',message:'暂时无法计算走法，请关闭提示后重试。',path:[]});\n  }\n};\n";
 function createInlineSolver() {
   const url=URL.createObjectURL(new Blob([inlineSolverSource],{type:'text/javascript'}));
@@ -1607,7 +1724,7 @@ const pieces = new Map(), inventory = new Map(), arrowButtons = new Map();
 const compact = matchMedia('(max-width:900px), (max-height:540px)');
 const reducedMotion = matchMedia('(prefers-reduced-motion:reduce)');
 const names = {up:'上', right:'右', down:'下', left:'左'};
-const label = p => p.id >= 6 ? `小卒${p.id-5}` : p.name;
+const label = p => p.id >= 6 ? (language==='en'?`Pawn ${p.id-5}`:`小卒${p.id-5}`) : t(p.name);
 const timeLabel = ms => {const s=Math.floor(ms/1000); return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;};
 let ready=false, hints=false, pickerOpen=false, celebrating=false, victoryTimer=null, victoryEpoch=0;
 let drag=null, suppressClick=false, toastTimer=null;
@@ -1721,7 +1838,7 @@ async function drainCommands() {
 }
 
 function toast(text) {
-  $('toast').textContent=text; $('toast').hidden=false;
+  $('toast').dataset.message=text; $('toast').textContent=t(text); $('toast').hidden=false;
   clearTimeout(toastTimer); toastTimer=setTimeout(() => {$('toast').hidden=true;},1800);
 }
 function showPicker(open) {
@@ -1733,7 +1850,7 @@ function resetVictory() {
 function celebrate(animation=null) {
   resetVictory();
   const epoch=victoryEpoch;
-  $('win-summary').textContent=`${game.history.length} 步 · ${timeLabel(game.time)}`;
+  $('win-summary').textContent=`${game.history.length} ${t("步")} · ${timeLabel(game.time)}`;
   const start=() => {
     if (game.phase!=='won'||epoch!==victoryEpoch) return;
     celebrating=true;
@@ -1817,7 +1934,9 @@ function renderBoard() {
     e.hidden=p.x<0;
     e.className=`piece ${p.id===0?'cao':p.id>=6?'soldier':p.h===2?'vertical':'horizontal'}${game.selected===p.id?' selected':''}${moving?' dragging':''}${p.id===0&&celebrating&&game.phase==='won'?' escape-animation':''}`;
     Object.assign(e.style,{left:`calc(${pose.x*25}% + 3px)`,top:`calc(${pose.y*20}% + 3px)`,width:`calc(${p.w*25}% - 6px)`,height:`calc(${p.h*20}% - 6px)`});
-    e.setAttribute('aria-label',`${label(p)}，${p.w}列${p.h}行，第${p.y+1}行第${p.x+1}列`);
+    e.setAttribute('aria-label',(language==='en'?`${label(p)}, ${p.w} columns by ${p.h} rows, row ${p.y+1}, column ${p.x+1}`:`${label(p)}，${p.w}列${p.h}行，第${p.y+1}行第${p.x+1}列`));
+    e.querySelector('.piece-name').textContent=t(p.name);
+    if(p.id===0)e.querySelector('.piece-role').textContent=t('魏 王');
     e.setAttribute('aria-pressed',String(game.selected===p.id));
   }
 }
@@ -1828,13 +1947,14 @@ function renderInventory() {
     e.className=`inventory-item ${p.id===0?'cao':p.id>=6?'soldier':p.h===2?'vertical':'horizontal'}${p.x>=0?' placed':''}${chosen?' chosen':''}`;
     e.style.setProperty('--w',p.w); e.style.setProperty('--h',p.h);
     e.disabled=!available;
-    e.setAttribute('aria-label',`${label(p)}，${p.w}乘${p.h}，${p.x>=0?'已放置':'未放置'}`);
+    e.setAttribute('aria-label',(language==='en'?`${label(p)}, ${p.w} by ${p.h}, ${p.x>=0?'placed':'not placed'}`:`${label(p)}，${p.w}乘${p.h}，${p.x>=0?'已放置':'未放置'}`));
+    e.querySelector('.tray-name').textContent=t(p.name);
     e.setAttribute('aria-pressed',String(chosen));
   }
   const selected=game.pieces.find(p => p.id===game.selected);
   $('rotate-button').disabled=game.phase!=='editing'||!selected||selected.id<1||selected.id>5||(selected.x>=0&&!canPlace(game.pieces,selected,selected.x,selected.y,selected.h,selected.w));
   $('remove-button').disabled=game.phase!=='editing'||!selected||selected.x<0;
-  $('copy-layout').title=PRESETS[game.preset].name;
+  $('copy-layout').title=t(PRESETS[game.preset].name);
 }
 function nextHint() {
   if (!hints||playback.active||prediction.current.key!==signature(game.pieces)||prediction.current.status!=='solved') return null;
@@ -1846,12 +1966,16 @@ function nextHint() {
 function renderArrows() {
   const next=nextHint();
   cells=game.phase==='playing'?moveRegions(game.pieces):[];
-  for (const e of arrowButtons.values()) e.hidden=true;
+  for (const e of arrowButtons.values()) {
+    e.hidden=true;
+    e.setAttribute('aria-label',moveLabel(game.pieces.find(p=>p.id===Number(e.dataset.pieceId)),e.dataset.direction));
+  }
   $('move-arrows').hidden=game.phase!=='playing'||Boolean(drag?.moved);
   if (game.phase!=='playing') return;
   for (const arrow of moveArrows(game.pieces)) {
     const e=arrowButtons.get(`${arrow.id}:${arrow.direction}`);
     e.hidden=false;
+    e.setAttribute('aria-label',moveLabel(game.pieces.find(p=>p.id===arrow.id),arrow.direction));
     e.style.left=`${arrow.x*25}%`; e.style.top=`${arrow.y*20}%`;
     e.className=`move-arrow ${arrow.direction}${next?.piece.id===arrow.id&&next.step.dx===arrow.dx&&next.step.dy===arrow.dy?' recommended':''}`;
   }
@@ -1866,23 +1990,23 @@ function renderHints() {
   $('hint-button').hidden=game.phase==='editing';
   $('hint-button').setAttribute('aria-pressed',String(hints));
   $('hint-button').setAttribute('aria-busy',String(checking));
-  $('hint-label').textContent=hints?'关闭提示':'开启提示';
+  $('hint-label').textContent=hints?t('关闭提示'):t('开启提示');
   $('hint-button').title='';
   $('hint-spinner').hidden=!checking;
   $('hint-status').textContent='';
   if (!hints||game.phase!=='playing') return;
-  if (checking) {$('hint-status').textContent='计算中'; return;}
+  if (checking) {$('hint-status').textContent=t('计算中'); return;}
   const next=nextHint();
   if (!next) {
-    const messages={unsolvable:'当前阵型无解',error:'提示计算失败',limit:'提示计算超时'};
+    const messages={unsolvable:t('当前阵型无解'),error:t('提示计算失败'),limit:t('提示计算超时')};
     const message=messages[prediction.current.status];
-    if (message) {$('hint-status').textContent=message; $('hint-button').title=message; $('hint-label').textContent=prediction.current.status==='unsolvable'?'无解':'提示失败';}
+    if (message) {$('hint-status').textContent=message; $('hint-button').title=message; $('hint-label').textContent=prediction.current.status==='unsolvable'?t('无解'):t('提示失败');}
     return;
   }
   $('hint-button').title='';
   const {piece:p,step}=next;
   const direction=step.dx===1?'right':step.dx===-1?'left':step.dy===1?'down':'up';
-  $('hint-status').textContent=`${label(p)}向${names[direction]}一格`;
+  $('hint-status').textContent=moveLabel(p,direction);
 }
 function render() {
   const editing=game.phase==='editing', showEditor=editing&&!pickerOpen;
@@ -1897,23 +2021,25 @@ function render() {
   $('classic-tab').setAttribute('aria-selected',String(!showEditor));
   $('custom-tab').setAttribute('aria-selected',String(showEditor));
   $('classic-panel').hidden=showEditor; $('custom-panel').hidden=!showEditor;
-  $('panel-title').textContent=showEditor?'布阵':'阵型';
+  $('panel-title').textContent=showEditor?t('布阵'):t('阵型');
   $('editor-count').hidden=!showEditor;
   $('editor-count').textContent=`${game.pieces.filter(p => p.x>=0).length} / 10`;
   $('edit-toggle').setAttribute('aria-pressed',String(editing));
   $('edit-toggle').disabled=editing&&!validateLayout(game.pieces).valid;
-  $('layout-title').textContent=game.mode==='custom'?'自定义':PRESETS[game.preset].name;
+  $('layout-title').textContent=game.mode==='custom'?t('自定义'):t(PRESETS[game.preset].name);
   $('game-status').hidden=game.phase==='playing';
-  $('game-status').textContent=editing?'布阵中':'已通关';
+  $('game-status').textContent=editing?t('布阵中'):t('已通关');
   $('stats').hidden=editing; $('editor-selection').hidden=!editing;
   const selected=game.pieces.find(p => p.id===game.selected);
   $('editor-selection').textContent=selected?`${label(selected)} · ${selected.w}×${selected.h}`:'';
   $('move-count').textContent=game.history.length; $('timer').textContent=timeLabel(game.time);
   $('undo-button').disabled=!game.history.length||editing;
   $('restart-button').disabled=editing;
-  $('restart-button').lastChild.textContent=game.phase==='won'?'再来一局':'重开';
+  $('restart-button').querySelector('span').textContent=game.phase==='won'?t('再来一局'):t('重开');
   for (const [i,e] of [...$('presets').children].entries()) {
     const active=game.mode==='classic'&&i===game.preset;
+    e.querySelector('.preset-name').textContent=t(PRESETS[i].name);
+    e.setAttribute('aria-label',language==='en'?`Choose ${t(PRESETS[i].name)} layout`:`选择${PRESETS[i].name}阵型`);
     e.classList.toggle('active',active); e.setAttribute('aria-pressed',String(active));
   }
   renderBoard(); renderInventory(); renderArrows(); renderHints();
@@ -2135,14 +2261,14 @@ function finishVisibleMotion() {
 $('grid-cells').innerHTML='<span></span>'.repeat(20);
 for (const p of PRESETS[0].pieces) {
   const e=document.createElement('button'); e.type='button'; e.dataset.piece=p.id;
-  const name=document.createElement('span'); name.className='piece-name'; name.textContent=p.name; e.append(name);
-  if (p.id===0) {const role=document.createElement('span'); role.className='piece-role'; role.textContent='魏 王'; e.append(role);}
+  const name=document.createElement('span'); name.className='piece-name'; name.textContent=t(p.name); e.append(name);
+  if (p.id===0) {const role=document.createElement('span'); role.className='piece-role'; role.textContent=t('魏 王'); e.append(role);}
   e.addEventListener('pointerdown',event => pointerDown(event,p.id));
   e.addEventListener('click',event => {event.stopPropagation(); if (event.detail===0) selectPiece(p.id);});
   e.addEventListener('lostpointercapture',event => {if (drag?.pointer===event.pointerId) pointerUp(null,true);});
   $('pieces').append(e); pieces.set(p.id,e);
   const choice=document.createElement('button'); choice.type='button'; choice.dataset.inventoryPiece=p.id;
-  const trayName=document.createElement('span'); trayName.className='tray-name'; trayName.textContent=p.name; choice.append(trayName);
+  const trayName=document.createElement('span'); trayName.className='tray-name'; trayName.textContent=t(p.name); choice.append(trayName);
   choice.addEventListener('pointerdown',event => pointerDown(event,p.id,'inventory'));
   choice.addEventListener('click',event => {event.stopPropagation(); if (event.detail===0&&game.phase==='editing') selectPiece(p.id);});
   choice.addEventListener('lostpointercapture',event => {if (drag?.pointer===event.pointerId) pointerUp(null,true);});
@@ -2151,7 +2277,7 @@ for (const p of PRESETS[0].pieces) {
     const arrow=document.createElement('button'); arrow.type='button'; arrow.className=`move-arrow ${direction}`;
     arrow.innerHTML='<span class="arrow-glyph"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4 L15 10 L6 16 Z"/></svg></span>';
     arrow.dataset.pieceId=p.id; arrow.dataset.direction=direction;
-    arrow.setAttribute('aria-label',`将${label(p)}向${names[direction]}移动一格`);
+    arrow.setAttribute('aria-label',moveLabel(p,direction));
     arrow.onclick=event => {event.stopPropagation(); movePiece(p.id,dx,dy);};
     $('move-arrows').append(arrow); arrowButtons.set(`${p.id}:${direction}`,arrow);
   }
@@ -2244,16 +2370,16 @@ reducedMotion.addEventListener('change',event=>{
     render();
   }
 });
-ready=true; render(); prediction.setBoard(game.pieces);
+ready=true; applyLanguage(); render(); prediction.setBoard(game.pieces);
 
 const context=document.modelContext;
 if (context?.registerTool) {
   const lifecycle=new AbortController();
-  const readState=() => ({phase:game.phase,layout:game.mode==='custom'?'自定义':PRESETS[game.preset].name,pieces:clone(game.pieces),selected:game.selected,moves:game.history.length,hintsEnabled:hints,hintStatus:hints?prediction.current.status:'off',predictionStatus:prediction.current.status,precomputed:prediction.current.status==='solved',loading:prediction.current.status==='checking',inMotion:Boolean(playback.active),dragging:drag?{pieceId:drag.id,source:drag.source,moved:drag.moved}:null,nextMove:hints?prediction.current.path[0]??null:null});
+  const readState=() => ({phase:game.phase,layout:game.mode==='custom'?t(t("自定义")):t(PRESETS[game.preset].name),pieces:clone(game.pieces),selected:game.selected,moves:game.history.length,hintsEnabled:hints,hintStatus:hints?prediction.current.status:'off',predictionStatus:prediction.current.status,precomputed:prediction.current.status==='solved',loading:prediction.current.status==='checking',inMotion:Boolean(playback.active),dragging:drag?{pieceId:drag.id,source:drag.source,moved:drag.moved}:null,nextMove:hints?prediction.current.path[0]??null:null});
   const tools=[
-    {name:'get_huarongdao_state',title:'查看华容道棋局',description:'读取棋盘、步数、后台预计算与拖动状态。',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute(input) {if (input&&Object.keys(input).length) throw new Error('不需要参数。'); return readState();}},
-    {name:'move_huarongdao_piece',title:'移动华容道棋子',description:'沿指定方向移动一格。',inputSchema:{type:'object',properties:{pieceId:{type:'integer',minimum:0,maximum:9},direction:{type:'string',enum:['up','right','down','left']}},required:['pieceId','direction'],additionalProperties:false},async execute(input) {if (!input||Object.keys(input).some(k => !['pieceId','direction'].includes(k))||!Number.isInteger(input.pieceId)||input.pieceId<0||input.pieceId>9||!Object.hasOwn(DIRECTIONS,input.direction)) throw new Error('无效参数。'); const [dx,dy]=DIRECTIONS[input.direction]; if (!await movePiece(input.pieceId,dx,dy)) throw new Error('方向受阻或正在布阵。'); return readState();}},
-    {name:'set_huarongdao_hints',title:'开关华容道提示',description:'切换小三角的提示动画，后台预计算始终执行。',inputSchema:{type:'object',properties:{enabled:{type:'boolean'}},required:['enabled'],additionalProperties:false},execute(input) {if (!input||typeof input.enabled!=='boolean'||Object.keys(input).some(k => k!=='enabled')) throw new Error('enabled 必须为布尔值。'); if (!setHints(input.enabled)) throw new Error('正在布阵。'); return readState();}}
+    {name:'get_huarongdao_state',title:t("查看华容道棋局"),description:t("读取棋盘、步数、后台预计算与拖动状态。"),inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute(input) {if (input&&Object.keys(input).length) throw new Error(t("不需要参数。")); return readState();}},
+    {name:'move_huarongdao_piece',title:t("移动华容道棋子"),description:t("沿指定方向移动一格。"),inputSchema:{type:'object',properties:{pieceId:{type:'integer',minimum:0,maximum:9},direction:{type:'string',enum:['up','right','down','left']}},required:['pieceId','direction'],additionalProperties:false},async execute(input) {if (!input||Object.keys(input).some(k => !['pieceId','direction'].includes(k))||!Number.isInteger(input.pieceId)||input.pieceId<0||input.pieceId>9||!Object.hasOwn(DIRECTIONS,input.direction)) throw new Error(t("无效参数。")); const [dx,dy]=DIRECTIONS[input.direction]; if (!await movePiece(input.pieceId,dx,dy)) throw new Error(t("方向受阻或正在布阵。")); return readState();}},
+    {name:'set_huarongdao_hints',title:t("开关华容道提示"),description:t("切换小三角的提示动画，后台预计算始终执行。"),inputSchema:{type:'object',properties:{enabled:{type:'boolean'}},required:['enabled'],additionalProperties:false},execute(input) {if (!input||typeof input.enabled!=='boolean'||Object.keys(input).some(k => k!=='enabled')) throw new Error(t("enabled 必须为布尔值。")); if (!setHints(input.enabled)) throw new Error(t("正在布阵。")); return readState();}}
   ];
   for (const tool of tools) try {Promise.resolve(context.registerTool(tool,{signal:lifecycle.signal})).catch(() => {});} catch {}
   window.addEventListener('pagehide',() => lifecycle.abort(),{once:true});
